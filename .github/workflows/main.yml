@@ -3,7 +3,7 @@ name: Compile and Release Qt6 Proyect
 on: push
 
 env:
-  QT_VERSION:     "6.2.0"
+  QT_VERSION:     "5.15"
   MINGW_VERSION:  "win64_mingw81"
   MINGW_PATH:     "mingw81_64"
   BUILD_TYPE:      Release
