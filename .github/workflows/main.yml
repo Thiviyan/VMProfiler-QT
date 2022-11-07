@@ -38,10 +38,6 @@ jobs:
           arch: 'win64_mingw73'
           dir: '${{github.workspace}}/qt/'
           install-deps: 'true'
-      
-      - name: Install MinGW
-        uses: egor-tensin/setup-mingw@v2
-       
           
       - name: List files in Qt
         run: find ${{env.Qt5_Dir}}
