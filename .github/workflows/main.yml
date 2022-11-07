@@ -32,6 +32,12 @@ jobs:
           arch: 'win64_mingw73'
           dir: '${{github.workspace}}/qt/'
           install-deps: 'true'
+          
+      - name: Set up Clang
+        uses: egor-tensin/setup-clang@v1
+        with:
+          version: latest
+          platform: x64
 
       - name: List files in Qt
         run: find ${{env.Qt5_Dir}}
