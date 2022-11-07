@@ -23,7 +23,7 @@ jobs:
       name: Install correct version of mingw
       uses: crazy-max/ghaction-chocolatey@v1
       with:
-        args: install mingw --version=8.1.0  -y
+        args: install mingw   -y
 #    -
 #      name: Check mingw directory
 #      run: |
