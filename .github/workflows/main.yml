@@ -1,4 +1,4 @@
-Byname: Compile and Release Qt6 Proyect
+name: Compile and Release Qt6 Proyect
 
 on: push
 
