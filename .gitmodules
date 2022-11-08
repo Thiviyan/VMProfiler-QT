@@ -1,6 +1,18 @@
 [submodule "dependencies/vmprofiler"]
 	path = dependencies/vmprofiler
-	url = https://githacks.org/vmp2/vmprofiler.git
+	url = https://github.com/xtremegamer1/vmprofiler
 [submodule "dependencies/ia32-doc"]
 	path = dependencies/ia32-doc
 	url = https://github.com/wbenny/ia32-doc.git
+[submodule "deps/linux-pe"]
+	path = deps/linux-pe
+	url = https://github.com/can1357/linux-pe.git
+[submodule "deps/zydis"]
+	path = deps/zydis
+	url = https://github.com/zyantific/zydis
+[submodule "tests/deps/cli-parser"]
+	path = tests/deps/cli-parser
+	url = https://githacks.org/_xeroxz/cli-parser
+[submodule "deps/unicorn"]
+	path = deps/unicorn
+	url = https://github.com/unicorn-engine/unicorn.git
