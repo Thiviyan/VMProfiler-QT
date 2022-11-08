@@ -4,3 +4,9 @@
 [submodule "dependencies/linux-pe"]
 	path = dependencies/linux-pe
 	url = https://github.com/can1357/linux-pe.git
+[submodule "tests/deps/cli-parser"]
+	path = dependencies/cli-parser
+	url = https://githacks.org/_xeroxz/cli-parser
+[submodule "dependencies/unicorn"]
+	path = deps/unicorn
+	url = https://github.com/unicorn-engine/unicorn.git
