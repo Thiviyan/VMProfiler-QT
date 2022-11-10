@@ -1,0 +1,48 @@
+name: CMake
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+env:
+  # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
+  BUILD_TYPE: Release
+
+jobs:
+  build:
+    # The CMake configure and build commands are platform agnostic and should work equally well on Windows or Mac.
+    # You can convert this to a matrix build if you need cross-platform coverage.
+    # See: https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions/managing-complex-workflows#using-a-build-matrix
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v3
+       with: 
+         submodules: recursive
+
+
+      - name: Checkout
+
+Check failure on line 8 in .github/workflows/msvc.yml
+GitHub Actions / .github/workflows/msvc.yml
+
+Invalid workflow file
+
+You have an error in your yaml syntax on line 8
+
+        uses: actions/checkout@v2
+          submodules:recursive
+      
+
+      - name: qt5
+       shell: pwsh
+         run: |
+        .\qt5.ps1
+
+        
+      - name: build
+        run:
+          cmake -B build
+          cmake --build build
