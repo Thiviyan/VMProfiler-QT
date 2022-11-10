@@ -18,21 +18,9 @@ jobs:
     runs-on: windows-latest
 
     steps:
-    - uses: actions/checkout@v3
-       with: 
-         submodules: recursive
-
 
       - name: Checkout
-
-Check failure on line 8 in .github/workflows/msvc.yml
-GitHub Actions / .github/workflows/msvc.yml
-
-Invalid workflow file
-
-You have an error in your yaml syntax on line 8
-
-        uses: actions/checkout@v2
+         uses: actions/checkout@v2
           submodules:recursive
       
 
