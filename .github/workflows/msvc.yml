@@ -4,8 +4,6 @@ jobs:
   Prepare:
     runs-on: windows-latest
 
-      - name: Setup MSVC Developer Command Prompt
-        uses: TheMrMilchmann/setup-msvc-dev@v2.0.0
 
       - name: Checkout
         uses: actions/checkout@v2
