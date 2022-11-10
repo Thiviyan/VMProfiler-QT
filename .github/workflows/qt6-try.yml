@@ -46,7 +46,7 @@ jobs:
       matrix:
         os: [ ubuntu-22.04 ]
         compiler: [ GCC, Clang ]
-        qt-version: [ 5, 6 ]
+        qt-version: [ 5 ]
         composition: [ own-quotient, static, dynamic ]
         exclude:
         - compiler: Clang
@@ -88,7 +88,7 @@ jobs:
         version: '${{ matrix.qt-version }}.*'
         cache: true
         cache-key-prefix: Qt
-        modules: ${{ matrix.qt-version == 6 && 'qtmultimedia' || '' }}
+        modules: ${{ matrix.qt-version == 5 && 'qtmultimedia' || '' }}
 
 
     - name: Install Ninja and other deps (Linux)
@@ -133,7 +133,7 @@ jobs:
         fi
         echo "CMAKE_ARGS=-GNinja -DCMAKE_BUILD_TYPE=RelWithDebInfo \
               -DBUILD_SHARED_LIBS=${{ matrix.composition == 'dynamic' }} \
-              -DBUILD_WITH_QT6=${{ matrix.qt-version == 6 }}" \
+              -DBUILD_WITH_QT5=${{ matrix.qt-version == 5 }}" \
             >>$GITHUB_ENV
         if [[ '${{ matrix.composition }}' == 'package' ]]; then
             mkdir package
