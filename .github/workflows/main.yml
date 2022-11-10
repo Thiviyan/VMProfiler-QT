@@ -32,17 +32,12 @@ jobs:
         version: '5.15.2'
         host: 'ubuntu'
         target: 'desktop'
-        arch: ''
+        arch: 'x64'
         dir: '${{ github.workspace }}/example/'
         install-deps: 'true'
         modules: 'qtcharts qtwebengine'
         mirror: 'http://mirrors.ocf.berkeley.edu/qt/'
         cached: 'false'
-        tools: 'tools_ifw,4.0,qt.tools.ifw.40 tools_qtcreator,4.13.2-0,qt.tools.qtcreator'
-        tools-only: 'false'
-        aqtversion: '==0.10.0'
-        py7zrversion: '==0.11.0'
-        extra: '--external 7z'
         
 
       - if: matrix.platform.name == 'x86'
@@ -101,11 +96,6 @@ jobs:
         modules: 'qtcharts qtwebengine'
         mirror: 'http://mirrors.ocf.berkeley.edu/qt/'
         cached: 'false'
-        tools: 'tools_ifw,4.0,qt.tools.ifw.40 tools_qtcreator,4.13.2-0,qt.tools.qtcreator'
-        tools-only: 'false'
-        aqtversion: '==0.10.0'
-        py7zrversion: '==0.11.0'
-        extra: '--external 7z'
         
       - name: Configure
         run: |
