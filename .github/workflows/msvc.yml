@@ -1,13 +1,16 @@
- build-windows:
-    name: Build 
-    runs-on: windowwin64_msvc2019_64s-latest
-
-  
+name: GitHub Actions CI
+on: [push, pull_request]
+jobs:
+  Prepare:
+    runs-on: windows2019
+    
     steps:
+      - name: Setup MSVC Developer Command Prompt
+        uses: TheMrMilchmann/setup-msvc-dev@v2.0.0
+
       - name: Checkout
         uses: actions/checkout@v2
-        with: 
-          submodules: recursive
+          submodules:recursive
 
       - name: Install Qt
         uses: jurplel/install-qt-action@v2
