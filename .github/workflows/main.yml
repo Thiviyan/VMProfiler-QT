@@ -23,7 +23,27 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
+          submodules:recursive
+      
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v2
+        with:
+        version: '5.15.2'
+        host: 'ubuntu'
+        target: 'desktop'
+        arch: ''
+        dir: '${{ github.workspace }}/example/'
+        install-deps: 'true'
+        modules: 'qtcharts qtwebengine'
+        mirror: 'http://mirrors.ocf.berkeley.edu/qt/'
+        cached: 'false'
+        tools: 'tools_ifw,4.0,qt.tools.ifw.40 tools_qtcreator,4.13.2-0,qt.tools.qtcreator'
+        tools-only: 'false'
+        aqtversion: '==0.10.0'
+        py7zrversion: '==0.11.0'
+        extra: '--external 7z'
+        
 
       - if: matrix.platform.name == 'x86'
         name: Bootstrap
@@ -49,6 +69,7 @@ jobs:
     name: Build ${{ matrix.platform.name }} ${{ matrix.compiler.name }} ${{ matrix.flavor }} (${{ matrix.mode.name }})
     runs-on: windows-latest
 
+  
     strategy:
       fail-fast: false
       matrix:
@@ -64,8 +85,28 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
+        with: 
+          submodules: recursive
 
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v2
+         with:
+        version: '5.15.2'
+        host: 'windows'
+        target: 'desktop'
+        arch: 'win64_msvc2019_64'
+        dir: '${{ github.workspace }}/example/'
+        install-deps: 'true'
+        modules: 'qtcharts qtwebengine'
+        mirror: 'http://mirrors.ocf.berkeley.edu/qt/'
+        cached: 'false'
+        tools: 'tools_ifw,4.0,qt.tools.ifw.40 tools_qtcreator,4.13.2-0,qt.tools.qtcreator'
+        tools-only: 'false'
+        aqtversion: '==0.10.0'
+        py7zrversion: '==0.11.0'
+        extra: '--external 7z'
+        
       - name: Configure
         run: |
           mkdir build
