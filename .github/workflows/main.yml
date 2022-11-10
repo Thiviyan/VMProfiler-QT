@@ -29,15 +29,10 @@ jobs:
       - name: Install Qt
         uses: jurplel/install-qt-action@v2
         with:
-        version: '5.15.2'
-        host: 'ubuntu'
-        target: 'desktop'
-        arch: 'x64'
-        dir: '${{ github.workspace }}/example/'
-        install-deps: 'true'
-        modules: 'qtcharts qtwebengine'
-        mirror: 'http://mirrors.ocf.berkeley.edu/qt/'
-        cached: 'false'
+          version: '5.15.2'
+          host: 'ubuntu'
+          target: 'desktop'
+          arch: 'x64'
         
 
       - if: matrix.platform.name == 'x86'
@@ -62,7 +57,7 @@ jobs:
 
   build-windows:
     name: Build ${{ matrix.platform.name }} ${{ matrix.compiler.name }} ${{ matrix.flavor }} (${{ matrix.mode.name }})
-    runs-on: windows-latest
+    runs-on: windowwin64_msvc2019_64s-latest
 
   
     strategy:
@@ -91,11 +86,7 @@ jobs:
           host: 'windows'
           target: 'desktop'
           arch: 'win64_msvc2019_64'
-          dir: '${{ github.workspace }}/example/'
-          install-deps: 'true'
-          modules: 'qtcharts qtwebengine'
-          mirror: 'http://mirrors.ocf.berkeley.edu/qt/'
-          cached: 'false'
+ 
         
       - name: Configure
         run: |
