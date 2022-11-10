@@ -112,7 +112,6 @@ target_include_directories(vmprofiler PUBLIC
 
 target_link_libraries(vmprofiler PUBLIC
 	Zydis
-	xtils
 	linux-pe
 )
 
