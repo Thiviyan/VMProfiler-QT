@@ -86,16 +86,16 @@ jobs:
 
       - name: Install Qt
         uses: jurplel/install-qt-action@v2
-         with:
-        version: '5.15.2'
-        host: 'windows'
-        target: 'desktop'
-        arch: 'win64_msvc2019_64'
-        dir: '${{ github.workspace }}/example/'
-        install-deps: 'true'
-        modules: 'qtcharts qtwebengine'
-        mirror: 'http://mirrors.ocf.berkeley.edu/qt/'
-        cached: 'false'
+        with:
+          version: '5.15.2'
+          host: 'windows'
+          target: 'desktop'
+          arch: 'win64_msvc2019_64'
+          dir: '${{ github.workspace }}/example/'
+          install-deps: 'true'
+          modules: 'qtcharts qtwebengine'
+          mirror: 'http://mirrors.ocf.berkeley.edu/qt/'
+          cached: 'false'
         
       - name: Configure
         run: |
