@@ -1,0 +1,24 @@
+ build-windows:
+    name: Build 
+    runs-on: windowwin64_msvc2019_64s-latest
+
+  
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with: 
+          submodules: recursive
+
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v2
+        with:
+          version: '5.15.2'
+          host: 'windows'
+          target: 'desktop'
+          arch: 'win64_msvc2019_64'
+ 
+        
+      - name: Configure
+        run:
+          cmake -B build
+          cmake --build build
