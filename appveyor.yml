@@ -243,4 +243,3 @@ for:
       on:
         branch: master                 # release from master branch only
         APPVEYOR_REPO_TAG: false       # deploy on non tag push only
-
