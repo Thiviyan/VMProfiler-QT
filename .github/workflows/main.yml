@@ -38,18 +38,18 @@ jobs:
       run: cmake -B build
       
     - name: build
-      run: cmake --build build
+      run: cmake --build build --config Release
     
     - uses: actions/upload-artifact@v2
       with:
         name: ${{ github.event.repository.name }}-${{ github.sha }}
-        path: build/
+        path: build/Release/
     
     - name: Compress artifacts
       uses: papeloto/action-zip@v1
       if: ${{ startsWith(github.ref, 'refs/tags/') }}
       with:
-        files: build/
+        files: build/Release/
         dest: ${{ github.event.repository.name }}-${{ github.sha }}.zip
 
     - name: Release
