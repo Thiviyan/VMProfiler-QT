@@ -40,10 +40,20 @@ jobs:
     - name: build
       run: cmake --build build --config Release
     
-    - uses: actions/upload-artifact@v2
+    - uses: actions/upload-artifact@v3
       with:
-        name: ${{ github.event.repository.name }}-${{ github.sha }}
+        name: my-artifact
         path: build/Release/
+      
+    - name: Tar files
+      run: tar -cvf VMProfiler-QT.tar /build/Release/
+
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: my-artifact
+        path: VMProfiler-QT.tar
+      
     
     - name: Compress artifacts
       uses: papeloto/action-zip@v1
