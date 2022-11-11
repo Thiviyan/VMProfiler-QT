@@ -191,7 +191,7 @@ jobs:
           set(qt_package_suffix "-MacOS-MacOS_12-Clang-MacOS-MacOS_12-X86_64-ARM64")
         endif()
 
-        set(qt_base_url "https://\${qt_mirror}/online/qtsdkrepository/${url_os}/desktop/qt6_${qt_version_dotless}")
+        set(qt_base_url "https://\${qt_mirror}/online/qtsdkrepository/${url_os}/desktop/qt5_${qt_version_dotless}")
         foreach(qt_mirror $ENV{QT_MIRRORS})
           cmake_language(EVAL CODE "
             message(\"Downloading: ${qt_base_url}/Updates.xml\")
@@ -204,13 +204,13 @@ jobs:
         endforeach()
 
         file(READ ./Updates.xml updates_xml)
-        string(REGEX MATCH "<Name>qt.qt6.*<Version>([0-9+-.]+)</Version>" updates_xml_output "${updates_xml}")
+        string(REGEX MATCH "<Name>qt.qt5.*<Version>([0-9+-.]+)</Version>" updates_xml_output "${updates_xml}")
         set(qt_package_version ${CMAKE_MATCH_1})
 
-        file(MAKE_DIRECTORY qt6)
+        file(MAKE_DIRECTORY qt5)
 
         # Save the path for other steps
-        file(TO_CMAKE_PATH "$ENV{GITHUB_WORKSPACE}/qt6/${qt_dir_prefix}" qt_dir)
+        file(TO_CMAKE_PATH "$ENV{GITHUB_WORKSPACE}/qt5/${qt_dir_prefix}" qt_dir)
         message("::set-output name=qt_dir::${qt_dir}")
 
         function(downloadAndExtract url archive)
@@ -224,26 +224,26 @@ jobs:
               break()
             endif()
           endforeach()
-          execute_process(COMMAND ${CMAKE_COMMAND} -E tar xvf ../${archive} WORKING_DIRECTORY qt6)
+          execute_process(COMMAND ${CMAKE_COMMAND} -E tar xvf ../${archive} WORKING_DIRECTORY qt5)
         endfunction()
 
         foreach(package qtbase qtdeclarative qttools qtsvg qttranslations)
           downloadAndExtract(
-            "${qt_base_url}/qt.qt6.${qt_version_dotless}.${qt_package_arch_suffix}/${qt_package_version}${package}${qt_package_suffix}.7z"
+            "${qt_base_url}/qt.qt5.${qt_version_dotless}.${qt_package_arch_suffix}/${qt_package_version}${package}${qt_package_suffix}.7z"
             ${package}.7z
           )
         endforeach()
 
         foreach(package qtimageformats qtserialport)
           downloadAndExtract(
-            "${qt_base_url}/qt.qt6.${qt_version_dotless}.addons.${package}.${qt_package_arch_suffix}/${qt_package_version}${package}${qt_package_suffix}.7z"
+            "${qt_base_url}/qt.qt5.${qt_version_dotless}.addons.${package}.${qt_package_arch_suffix}/${qt_package_version}${package}${qt_package_suffix}.7z"
             ${package}.7z
           )
         endforeach()
 
         foreach(package qtquicktimeline qtquick3d qt5compat qtshadertools)
           downloadAndExtract(
-            "${qt_base_url}/qt.qt6.${qt_version_dotless}.${package}.${qt_package_arch_suffix}/${qt_package_version}${package}${qt_package_suffix}.7z"
+            "${qt_base_url}/qt.qt5.${qt_version_dotless}.${package}.${qt_package_arch_suffix}/${qt_package_version}${package}${qt_package_suffix}.7z"
             ${package}.7z
           )
         endforeach()
@@ -251,17 +251,17 @@ jobs:
         # uic depends on libicu56.so
         if ("${{ runner.os }}" STREQUAL "Linux")
           downloadAndExtract(
-            "${qt_base_url}/qt.qt6.${qt_version_dotless}.${qt_package_arch_suffix}/${qt_package_version}icu-linux-Rhel7.2-x64.7z"
+            "${qt_base_url}/qt.qt5.${qt_version_dotless}.${qt_package_arch_suffix}/${qt_package_version}icu-linux-Rhel7.2-x64.7z"
             icu.7z
           )
         endif()
 
-        file(READ "qt6/${qt_dir_prefix}/mkspecs/qconfig.pri" qtconfig)
+        file(READ "qt5/${qt_dir_prefix}/mkspecs/qconfig.pri" qtconfig)
         string(REPLACE "Enterprise" "OpenSource" qtconfig "${qtconfig}")
         string(REPLACE "licheck.exe" "" qtconfig "${qtconfig}")
         string(REPLACE "licheck64" "" qtconfig "${qtconfig}")
         string(REPLACE "licheck_mac" "" qtconfig "${qtconfig}")
-        file(WRITE "qt6/${qt_dir_prefix}/mkspecs/qconfig.pri" "${qtconfig}")
+        file(WRITE "qt5/${qt_dir_prefix}/mkspecs/qconfig.pri" "${qtconfig}")
 
         if ("${{ runner.os }}" STREQUAL "Windows")
           # deploy "system" runtimes into Qt, so they get deployed as well
@@ -269,7 +269,7 @@ jobs:
             # deploy MinGW
             foreach(file libwinpthread-1.dll libstdc++-6.dll libgcc_s_seh-1.dll)
               file(INSTALL "$ENV{GITHUB_WORKSPACE}/${{ matrix.config.toolchain_path }}/${file}"
-                   DESTINATION "qt6/${qt_dir_prefix}/bin"
+                   DESTINATION "qt5/${qt_dir_prefix}/bin"
                    USE_SOURCE_PERMISSIONS)
             endforeach()
           else()
@@ -277,7 +277,7 @@ jobs:
             foreach(file vcruntime140.dll concrt140.dll msvcp140_1.dll msvcp140_2.dll
                          msvcp140_codecvt_ids.dll vcruntime140_1.dll msvcp140.dll)
               file(INSTALL "C:/Windows/System32/${file}"
-                   DESTINATION "qt6/${qt_dir_prefix}/bin")
+                   DESTINATION "qt5/${qt_dir_prefix}/bin")
             endforeach()
           endif()
         endif()
