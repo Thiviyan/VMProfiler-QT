@@ -1,3 +1,5 @@
+[![Visual Studio](https://github.com/Thiviyan/VMProfiler-QT/actions/workflows/main.yml/badge.svg)](https://github.com/Thiviyan/VMProfiler-QT/actions/workflows/main.yml)
+
 <div align="center">
     <div>
         <img src="https://imgur.com/koSBEKm.png"/>
