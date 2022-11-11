@@ -20,13 +20,16 @@ jobs:
     - name: Add msbuild to PATH
       uses: microsoft/setup-msbuild@v1.0.2
     
-    - name: Install Qt5/Qt6 (yaqti)
-      uses: WillBrennan/yaqti@2021.07.29
+    - name: Install Qt
+      uses: jurplel/install-qt-action@v3
       with:
+        aqtversion: '==2.1.*'
         version: '5.15.2'
         host: 'windows'
         target: 'desktop'
-        modules: 'qtcharts qtwebengine'
+        arch: 'win64_msvc2019_64'
+        modules: 'Desktop MSVC 2019 64-bit debug information files Qt Charts for MSVC 2019 64-bit Qt Data Visualization for MSVC 2019 64-bit Qt Lottie Animation for MSVC 2019 64-bit Qt Network Authentication for MSVC 2019_64-bit Qt Purchasing for MSVC 2019 64-bit Qt Quick 3D for MSVC 2019 64-bit Qt Quick Timeline for MSVC 2019 64-bit Qt Script for MSVC 2019 64-bit Qt Virtual Keyboard for MSVC 2019 64-bit Qt WebEngine for MSVC 2019 64-bit Qt WebGL Streaming Plugin for msvc2019_64-bit'
+        tools: 'tools_cmake'
         
     - name: build
       run: cmake -B build
