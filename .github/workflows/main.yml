@@ -20,11 +20,10 @@ jobs:
     - name: Add msbuild to PATH
       uses: microsoft/setup-msbuild@v1.0.2
     
-    - name: Run Azure PowerShell script
-      uses: azure/powershell@v1
-      with:
-        inlineScript: |
-                      .\qt5.ps1
+    - name: Perform a Pester test from the Tests.ps1 file
+      shell: pwsh
+      run: |    
+          .\qt5.ps1
 
         
     - name: build
