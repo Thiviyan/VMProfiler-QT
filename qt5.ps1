@@ -31,9 +31,7 @@ $openssl_bin_folder = $openssl_base_folder + "\bin"
 $mysql_include_folder = "c:\\Programy\\MySQL\\include"
 $mysql_lib_folder = "c:\\Programy\\MySQL\\lib"
 
-# Download Qt sources, unpack.
-$AllProtocols = [System.Net.SecurityProtocolType]'Ssl3,Tls,Tls11,Tls12'
-[System.Net.ServicePointManager]::SecurityProtocol = 'Ssl3,Tls,Tls11,Tls12'
+# Download Qt sources, unpack
 
 Invoke-WebRequest -Uri $qt_sources_url -OutFile $qt_archive_file
 & "$tools_folder\7za.exe" x $qt_archive_file
