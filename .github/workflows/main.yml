@@ -41,26 +41,26 @@ jobs:
       run: cmake --build build --config Release
       
     - name: Tar files
-      run: tar -cvf VMProfiler-QT.tar D:\a\VMProfiler-QT\VMProfiler-QT\build\Release\
+      run: tar -cvf VMProfiler-QT.tar D:/a/VMProfiler-QT/VMProfiler-QT/build/Release
 
     - name: Upload Artifact
       uses: actions/upload-artifact@v3
       with:
         name: my-artifact
-        path: D:\a\VMProfiler-QT\VMProfiler-QT\build\Release\VMProfiler-QT.tar
+        path: D:/a/VMProfiler-QT/VMProfiler-QT/build/Release/VMProfiler-QT.tar
       
     
     - name: Compress artifacts
       uses: papeloto/action-zip@v1
       if: ${{ startsWith(github.ref, 'refs/tags/') }}
       with:
-        files: D:\a\VMProfiler-QT\VMProfiler-QT\build\Release\
+        files: D:/a/VMProfiler-QT/VMProfiler-QT/build/Release/
         dest: ${{ github.event.repository.name }}-${{ github.sha }}.zip
       
     - uses: actions/upload-artifact@v3
       with:
         name: my-artifact
-        path: D:\a\VMProfiler-QT\VMProfiler-QT\build\Release\
+        path: D:/a/VMProfiler-QT/VMProfiler-QT/build/Release/
 
     - name: Release
       uses: softprops/action-gh-release@v1
