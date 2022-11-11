@@ -44,18 +44,16 @@ jobs:
 #      name: Check mingw directory
 #      run: |
 #        ls C:\ProgramData\chocolatey\lib\mingw\tools\install\mingw64\bin
-    -
-      name: Install Qt
+    - name: Install Qt
       uses: jurplel/install-qt-action@v2
       with:
-        host: windows
+        host: "windows"
         target: "desktop"
-        version: ${{ env.QT_VERSION }}
-        arch: ${{ env.MINGW_VERSION }}
+        version: "5.15.2"
+        arch: "win64_msvc2019_64"
         dir: "${{github.workspace}}/qt"
         install-deps: "true"
-    -
-      name: Set Qt path and refresh
+    - name: Set Qt path and refresh
       run: |
         echo "${{github.workspace}}/qt/Qt/${{ env.QT_VERSION }}/${{ env.MINGW_PATH }}/bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
         refreshenv
