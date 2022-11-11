@@ -4,7 +4,7 @@ on: [push, pull_request]
 
 env:
   QT_VERSION:     "5.15.2"
-  BUILD_TYPE:      Release
+  BUILD_TYPE:      "Release"
 
 jobs:
   build:
@@ -17,19 +17,22 @@ jobs:
     - name: Add msbuild to PATH
       uses: microsoft/setup-msbuild@v1.0.2
     
-    - name: Add msbuild to PATH
-      uses: microsoft/setup-msbuild@v1.0.2
-    
     - name: Install Qt
-      uses: jurplel/install-qt-action@v3
+      uses: jurplel/install-qt-action@v2
       with:
-        aqtversion: '==2.1.*'
-        version: '5.15.2'
-        host: 'windows'
-        target: 'desktop'
-        arch: 'win64_msvc2019_64'
-        modules: 'Desktop MSVC 2019 64-bit debug information files Qt Charts for MSVC 2019 64-bit Qt Data Visualization for MSVC 2019 64-bit'
-        tools: 'tools_cmake'
+        host: "windows"
+        target: "desktop"
+        version: "5.15.2"
+        arch: "win64_msvc2019_64"
+        dir: "${{github.workspace}}/qt"
+        install-deps: "true"
+        
+    - name: Set Qt path and refresh
+      run: |
+          refreshenv
+        #Write-Output (Get-Command g++.exe).Path
+        #g++.exe --version
+        
         
     - name: build
       run: cmake -B build
