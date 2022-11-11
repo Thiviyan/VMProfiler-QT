@@ -2,13 +2,18 @@ name: Visual Studio
 
 on: [push, pull_request]
 
+env:
+  QT_VERSION:     "5.15.2"
+  BUILD_TYPE:      Release
+
 jobs:
   build:
-  runs-on: windows-latest
-steps:
-    - name: Checkout
-      uses: actions/checkout@v2
-    
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        submodules: recursive
+                      
     - name: Add msbuild to PATH
       uses: microsoft/setup-msbuild@v1.0.2
     
@@ -16,13 +21,12 @@ steps:
       uses: microsoft/setup-msbuild@v1.0.2
     
     - name: qt5
-     shell: pwsh
-       run: |
+      run: |
         .\qt5.ps1
 
         
     - name: build
-       run:
+      run:
           cmake -B build
           cmake --build build
 
