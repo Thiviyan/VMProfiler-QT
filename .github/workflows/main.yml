@@ -24,7 +24,7 @@ jobs:
       uses: WillBrennan/yaqti@2021.07.29
       with:
         version: '5.15.2'
-        host: 'WINDOWS'
+        host: 'windows'
         target: 'desktop'
         modules: 'qtcharts qtwebengine'
         
